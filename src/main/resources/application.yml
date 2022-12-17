@@ -5,28 +5,18 @@ spring:
   application:
     name: airport
   r2dbc:
-    host: ${DATASOURCE_HOST:localhost}
     password: ${DATASOURCE_PW}
     username: ${DATASOURCE_USER}
     url: ${DATASOURCE_URL}
 
 
-
   flyway:
     default-schema: public
     schemas: public
+    url: ${FLYWAY_URL}
     user: ${DATASOURCE_USER}
     password: ${DATASOURCE_PW}
-    locations: classpath:/db/migration
+    locations: classpath:${FLYWAY_LOCATION:/db/migration,/db/data} # ,/db/data
 
-  jpa:
-    generate-ddl: false
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        default-schema: public
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-    show-sql: true
+
 
